@@ -50,6 +50,7 @@ let car=[]
 
   return (
     <>
+    <Text style={{alignSelf:'center'}}>RM:552475 NOME: LUIZ FELIPE</Text>
     
     <View style={{ flex: 1, justifyContent: 'center', flexDirection: 'column',alignSelf:'center', gap:10 }}>
       <Text style={{alignSelf:'center'}}>
