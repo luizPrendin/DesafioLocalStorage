@@ -15,7 +15,9 @@ export default function ListExcluir({ route,navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View>
+      <Button title="VOLTAR" onPress={()=> navigation.navigate('Home')}/>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Dados Salvos:</Text>
       <FlatList
         data={carrosTemp}
@@ -32,6 +34,8 @@ export default function ListExcluir({ route,navigation }) {
         
       />
     </View>
+    </View>
+    
   );
 }
 

@@ -1,12 +1,14 @@
 import React from 'react'
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet ,Button} from 'react-native';
 
 
-export default function ListCarros({route}) {
+export default function ListCarros({route,navigation}) {
 
     const { carros } = route.params;
-
+    
   return (
+    <View>
+      <Button title="VOLTAR" onPress={()=> navigation.navigate('Home')}/>
      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Dados Salvos:</Text>
       <FlatList
@@ -22,6 +24,8 @@ export default function ListCarros({route}) {
         keyExtractor={(item, index) => index.toString()}
       />
     </View>
+    </View>
+    
   )
 }
 const styles = StyleSheet.create({

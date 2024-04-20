@@ -1,23 +1,24 @@
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Button,Text, TextInput, StyleSheet } from 'react-native';
+
+
+import { View, Button,Text, TextInput, StyleSheet  } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState,useEffect } from 'react';
-
+import { Linking } from 'react-native';
 
 
 
 
 export default function Home({navigation}) {
   
-  const Tab = createBottomTabNavigator();
+  
 
   const [modeloCarro, setModelo] = useState('')
   const[marcaCarro,setMarca] = useState('')
   const[anoCarro, setAno]= useState('')
   const[placaCarro, setPlaca] = useState('')
   const[listCarros,setListCarros]=useState([])
+  
 
    async function buscarDados(){
     const c = await AsyncStorage.getItem("CARROS")
@@ -38,19 +39,24 @@ let car=[]
     carros.push({modelo:modeloCarro,marca:marcaCarro,ano:anoCarro,placa:placaCarro})
     await AsyncStorage.setItem("CARROS",JSON.stringify(carros))
     alert("Carro salvo na lista com sucesso!")
-    buscarDados()
-    // Passar os dados para a tela de destino
-    navigation.navigate('ListCarros', { carros });
-    car =carros
+    await buscarDados()
+    car = carros
     setModelo('')
     setMarca('')
     setAno('')
     setPlaca('')
+    
+    // Passar os dados para a tela de destino
+    
+    //navigation.navigate('ListCarros', { carros });
+    Linking.openURL('http://localhost:8081/')
+    
+    
   }
 
   return (
     <>
-    <Text style={{alignSelf:'center'}}>RM:552475 NOME: LUIZ FELIPE</Text>
+    
     
     <View style={{ flex: 1, justifyContent: 'center', flexDirection: 'column',alignSelf:'center', gap:10 }}>
       <Text style={{alignSelf:'center'}}>
@@ -95,9 +101,9 @@ let car=[]
       />
 
       <Button title="ADICIONAR" onPress={savar} />
-      <Button title="LISTAR" onPress={() => {buscarDados(), navigation.navigate('ListCarros',{carros: listCarros})} }/>
-      <Button title="EXCLUIR" onPress={() => navigation.navigate('ListExcluir', { carros: listCarros,setCarros: setListCarros})} />
-   
+      <Button title="LISTAR" onPress={() =>  {buscarDados(),navigation.navigate('ListCarros',{carros: listCarros})} }/>
+      <Button title="EXCLUIR" onPress={() =>{ navigation.navigate('ListExcluir', { carros: listCarros,setCarros: setListCarros})}} />
+      <Button title="ABOUT" onPress={()=> navigation.navigate('About')}/>
     </View>
     </>
     
